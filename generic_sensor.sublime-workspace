@@ -1,0 +1,1447 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"contr",
+				"control_yaw"
+			],
+			[
+				"osal",
+				"osalThreadSleepMilliseconds"
+			],
+			[
+				"FlashSave",
+				"FlashSave_Status"
+			],
+			[
+				"output",
+				"output_mixer"
+			],
+			[
+				"PI",
+				"PI_Data"
+			],
+			[
+				"flash",
+				"flash_save"
+			],
+			[
+				"EST",
+				"ESTIMATION_NEW_ESTIMATION"
+			],
+			[
+				"event",
+				"event_source_t"
+			],
+			[
+				"estima",
+				"estimation_events_es"
+			],
+			[
+				"outpu",
+				"output_mixer"
+			],
+			[
+				"ThreadC",
+				"ThreadControl"
+			],
+			[
+				"waThreadC",
+				"waThreadControl"
+			],
+			[
+				"FLI",
+				"FLIGHTMODE_DISARMED"
+			],
+			[
+				"control_re",
+				"control_reference"
+			],
+			[
+				"FLASHSAVE",
+				"FLASHSAVE_FLASH_FULL"
+			],
+			[
+				"FLASHSAVE_",
+				"FLASHSAVE_OK"
+			],
+			[
+				"FLASHSACE",
+				"FLASHSAVE_SIZE_MISSMATCH"
+			],
+			[
+				"page",
+				"page_number"
+			],
+			[
+				"num",
+				"num_pages"
+			],
+			[
+				"my",
+				"mystruct"
+			],
+			[
+				"FLASHS",
+				"FLASHSAVE_UNALLOCATED"
+			],
+			[
+				"wh",
+				"while"
+			],
+			[
+				"req",
+				"requested_size"
+			],
+			[
+				"int",
+				"int16_t"
+			],
+			[
+				"uin",
+				"uint8_t"
+			],
+			[
+				"Flash",
+				"FlashSave_STR2ID"
+			],
+			[
+				"uint",
+				"uint8_t"
+			],
+			[
+				"ext",
+				"ext_flash"
+			],
+			[
+				"chMtx",
+				"chMtxUnlock"
+			],
+			[
+				"l",
+				"lock"
+			],
+			[
+				"sens",
+				"sensor_calibration"
+			],
+			[
+				"hm",
+				"hmc5983cfg"
+			],
+			[
+				"read",
+				"read_lock"
+			],
+			[
+				"data",
+				"data_holder"
+			],
+			[
+				"hmc",
+				"hmc5983"
+			],
+			[
+				"da",
+				"data_holder"
+			],
+			[
+				"va",
+				"value"
+			],
+			[
+				"MODE_",
+				"MODE_PWM_INPUT"
+			],
+			[
+				"RC_IN",
+				"RC_INPUT_SETTINGS_SIZE"
+			],
+			[
+				"RC_",
+				"RC_RAW_INPUT_SIZE"
+			],
+			[
+				"Exter",
+				"ExternalFlash_ReadBuffer"
+			],
+			[
+				"Externa",
+				"ExternalFlash_WritePage"
+			],
+			[
+				"FLASH_SEC",
+				"FLASH_SECTOR_0"
+			],
+			[
+				"MODE",
+				"MODE_CPPM_INPUT"
+			],
+			[
+				"rssi",
+				"rssi_frequency"
+			],
+			[
+				"CPPM",
+				"CPPM_Mode"
+			],
+			[
+				"LED",
+				"LED_RED"
+			],
+			[
+				"old",
+				"old_capture"
+			],
+			[
+				"IN",
+				"INPUT_CH2_RSSI"
+			],
+			[
+				"INP",
+				"INPUT_CH1_CPPM"
+			],
+			[
+				"INPUT_",
+				"INPUT_RSSI"
+			],
+			[
+				"ex",
+				"ext_input"
+			],
+			[
+				"Fre",
+				"FreeRTOS"
+			],
+			[
+				"TIM_GetCa",
+				"TIM_GetCapture3"
+			],
+			[
+				"INPUT",
+				"INPUT_CH5"
+			],
+			[
+				"TIM_FLAG",
+				"TIM_FLAG_CC3"
+			],
+			[
+				"n",
+				"num_sync"
+			],
+			[
+				"temp",
+				"template"
+			],
+			[
+				"nu",
+				"num_bytes"
+			],
+			[
+				"y",
+				"yield"
+			],
+			[
+				"ptrGet",
+				"ptrGetUniqueID"
+			],
+			[
+				"prtGet",
+				"ptrGetUserIDString"
+			],
+			[
+				"prt",
+				"ptrGetSensorCalibration"
+			],
+			[
+				"print",
+				"print_quaternion"
+			],
+			[
+				"att",
+				"attitude_ekf"
+			],
+			[
+				"xSe",
+				"xSemaphoreGive"
+			],
+			[
+				"acc",
+				"acc_init"
+			],
+			[
+				"attitude",
+				"attitude_guess"
+			],
+			[
+				"SR",
+				"SR_1"
+			],
+			[
+				"vTask",
+				"vTaskDelay"
+			],
+			[
+				"print_q",
+				"print_quaternion"
+			],
+			[
+				"start",
+				"start_attitude"
+			],
+			[
+				"print_v",
+				"print_vector"
+			],
+			[
+				"print_",
+				"print_quaternion"
+			],
+			[
+				"com",
+				"comlink"
+			],
+			[
+				"inl",
+				"include"
+			],
+			[
+				"quaternion",
+				"quaternion_t"
+			],
+			[
+				"at",
+				"attitude_ekf"
+			],
+			[
+				"chol",
+				"chol_decomp_upper"
+			],
+			[
+				"quaterino",
+				"quaternion_t"
+			],
+			[
+				"mag_",
+				"mag_v"
+			],
+			[
+				"raw",
+				"raw_data"
+			],
+			[
+				"vector",
+				"vector3f_t"
+			],
+			[
+				"mag",
+				"mag_B"
+			],
+			[
+				"vec",
+				"vector3f_t"
+			],
+			[
+				"tr",
+				"trigonometry"
+			],
+			[
+				"linear",
+				"linear_algebra"
+			],
+			[
+				"Cmd_GetEstima",
+				"Cmd_GetEstimationRate"
+			],
+			[
+				"Port",
+				"Port_Type"
+			],
+			[
+				"Circ",
+				"Circular_Buffer_Type"
+			],
+			[
+				"ptr",
+				"ptrGetOutputMixer"
+			],
+			[
+				"Flas",
+				"Flash_Save_Template_Type"
+			],
+			[
+				"inc",
+				"include"
+			],
+			[
+				"SPI1",
+				"SPI1Init"
+			],
+			[
+				"SPI_CS",
+				"SPI1_CS_LOW"
+			],
+			[
+				"def",
+				"define"
+			],
+			[
+				"SPIIni",
+				"SPI1Init"
+			],
+			[
+				"Generate",
+				"GenerateGenericCommand"
+			],
+			[
+				"xUS",
+				"xUSBSendData"
+			],
+			[
+				"USART",
+				"USART3"
+			],
+			[
+				"US",
+				"USART_putc"
+			],
+			[
+				"CB",
+				"CBuff"
+			],
+			[
+				"Cb",
+				"CBuff"
+			],
+			[
+				"test",
+				"testbuff"
+			],
+			[
+				"gener",
+				"generators"
+			],
+			[
+				"USA",
+				"USART3"
+			],
+			[
+				"USB",
+				"USB_Write_Lock"
+			],
+			[
+				"wr",
+				"write_lock"
+			],
+			[
+				"Get",
+				"GetParser"
+			],
+			[
+				"parser",
+				"parser_lookup"
+			],
+			[
+				"APP",
+				"APP_Rx_ptr_in"
+			],
+			[
+				"hea",
+				"head"
+			],
+			[
+				"P",
+				"Port"
+			],
+			[
+				"pH",
+				"pHolder"
+			],
+			[
+				"Cbuff",
+				"Cbuff_USB"
+			],
+			[
+				"GetR",
+				"Cmd_GetRunningMode"
+			],
+			[
+				"Gene",
+				"GenerateGenericCommand"
+			],
+			[
+				"Cir",
+				"CircularBuffer_SpaceLeft"
+			],
+			[
+				"KF",
+				"KFly_Command_Type"
+			],
+			[
+				"stat",
+				"switch-statement"
+			],
+			[
+				"ci",
+				"circularbuffer"
+			],
+			[
+				"in",
+				"include"
+			],
+			[
+				"seria",
+				"serialmanager_types"
+			],
+			[
+				"state",
+				"statemachine_types"
+			],
+			[
+				"port",
+				"portMAX_DELAY"
+			],
+			[
+				"size",
+				"size"
+			],
+			[
+				"cir",
+				"Circular_Buffer_Type"
+			],
+			[
+				"Err",
+				"ErrorStatus"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "main.c",
+			"settings":
+			{
+				"buffer_size": 939,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 6447,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "mcuconf.h",
+			"settings":
+			{
+				"buffer_size": 13103,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "chconf.h",
+			"settings":
+			{
+				"buffer_size": 15628,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "halconf.h",
+			"settings":
+			{
+				"buffer_size": 9293,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/User/MakeARM.sublime-build",
+	"command_palette":
+	{
+		"height": 60.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"latex",
+				"LaTeXTools: Reconfigure and migrate settings"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"sub",
+				"SublimeGDB: Open Register View"
+			],
+			[
+				"sublimegdb",
+				"Preferences: SublimeGDB Settings – Default"
+			],
+			[
+				"sublime",
+				"Preferences: SublimeGDB Settings – User"
+			],
+			[
+				"gdb",
+				"Preferences: SublimeGDB Settings – Default"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"packagere",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"the",
+				"Themr: List themes"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 386.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"make clean",
+			"git describe --tags HEAD",
+			"shell git describe --tags HEAD",
+			"cmd.exe git rev-parse Head",
+			"cmd",
+			"shell",
+			"git rev-parse Head",
+			"dir",
+			"git rev-parse Head",
+			"shell",
+			"git commit",
+			"git",
+			"make all",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Emil/Documents/GitHub/EmbeddedGenericSensor/make/date.bat",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/communication/inc/serialmanager.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/serial_usb.o",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/serial_lld.o",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/serial_usb.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/serial_lld.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/serialmanager.o",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/serialmanager.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/serial.o",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/serial.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/sensor_read.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/sensors/inc/sensor_read.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/sdc.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/sensors/src/sensor_read.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/communication/src/statemachine_generators.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/statemachine_parsers.o",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/statemachine_generators.o",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/statemachine_parsers.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/statemachine_generators.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/statemachine.o",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/statemachine.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/communication/inc/statemachine.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/rc_input/inc/rc_input.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/control/inc/pid.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/rc_input/src/rc_input.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/rc_output/src/rc_output.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/control/inc/control.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/control/src/control.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/chconf.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/communication/src/statemachine.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/communication/src/circularbuffer.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/communication/src/serialmanager.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/estimation/src/attitude_ekf.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/communication/inc/statemachine_generators.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/external_flash/src/flash_save.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/st.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/math/inc/quaternion.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/estimation/inc/estimation.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/external_flash/inc/ext_flash.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/estimation/inc/attitude_ekf.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/attitude_ekf.o",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/dump.txt",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/math/inc/trigonometry.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/Makefile",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/kfly.sublime-project",
+		"/C/Users/Emil/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/kfly.sublime-workspace",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/math/src/quaternion.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/usb/inc/usb_desc.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/communication/inc/serialmanager_types.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/communication/src/statemachine_parsers.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/communication/inc/statemachine_parsers.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/sensors/inc/sensor_calibration.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/external_flash/inc/flash_save.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/estimation/src/estimation.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/external_flash/src/ext_flash.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/flash_save.o",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/flash_save.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/pid.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/rc_input.o",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/rc_input.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/make/rules_ccm.ld",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/README",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/sensor_read.o",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/attitude_ekf.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/adc.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/estimation.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/main.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/control/src/pid.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/pal.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/rc_output/inc/rc_output.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/control.lst",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/srekf_v3.log",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/srekf_v3.blg",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/srekf_v3.bbl",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/srekf_v3.aux",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/srekf_v2.tex",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/srekf_v2.log",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/srekf_v2.blg",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/srekf_v2.bbl",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/srekf_v2.aux",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/srekf_v1.tex",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/srekf_v3.tex",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/srckf_old.tex",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/srekf_v2.fdb_latexmk",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/Figure_attitude_update.tex",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/LinesStyle.tex",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/BlocksStyle.tex",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/Figure_complete_filter.tex",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/Figure_1.tex",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/LinesStyle.log",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/Figure_vector_proj.tex",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/figure_test.synctex.gz",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/Figure_attitude_update.log",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/Figure_vector_proj.log",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/figure_test.log",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/figure_test.aux",
+		"/C/Dropbox/Arbetes_grejer/Skola/Article Workshop/Journal 2014 - GPS aided Inertial Navigation System/Figure_1.log",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/make/STM32F405xG_CCM.ld",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/make/STM32F405xG.ld",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/make/rules.ld",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/ext_flash.o",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/ext_flash.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/ext.lst",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/drivers/eicu.c",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/version_information/inc/version_information.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/control.o",
+		"/C/Users/Emil/AppData/Roaming/Sublime Text 3/Packages/User/MakeARM.sublime-build",
+		"/C/Users/Emil/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/board/board.h",
+		"/C/Users/Emil/AppData/Roaming/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/math/inc/linear_algebra.h",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/lst/quaternion.lst",
+		"/C/Users/Emil/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings.0.bak",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32F4xx/stm32f4xx.h",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32/TIMv1/stm32_tim.h",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32F4xx/stm32_rcc.h",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32F0xx/stm32f0xx.h",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32F0xx/stm32_rcc.h",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/SPC5xx/eTimer_v1/icu_lld.c",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/SPC5xx/eTimer_v1/icu_lld.h",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32/TIMv1/pwm_lld.c",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32/TIMv1/icu_lld.c",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32/TIMv1/icu_lld.h",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32/TIMv1/pwm_lld.h",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/src/pwm.c",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/kernel/include/chsys.h",
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/ports/GCC/ARMCMx/chcore_v7m.h"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 92.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"RCOutputInit",
+			"PWM",
+			"chEvtBroadcastFlagsI",
+			"if (chEvtIsListeningI(",
+			"mutex_t",
+			"chEvtBroadcastFlagsI(",
+			"FlashSave",
+			"rc",
+			"mutex",
+			"imu_calibration",
+			"event_listener",
+			"input",
+			"erase",
+			".\n",
+			"union",
+			"SPI_DUMMY_BYTE",
+			"icucallback_t",
+			"STM32_TIM9_HANDLER",
+			"TIM_TypeDef",
+			"TIM9",
+			"ICU_DRIVER_EXT_FIELDS",
+			"channel",
+			"CCR",
+			"channel",
+			"CR",
+			"short",
+			"channel",
+			"USR_cb",
+			"RCC_GetFlagStatus",
+			"rcc_getflag",
+			"SFTRSTF",
+			"NVIC_SystemReset",
+			"SaveStructure_NumberOfBytes",
+			"number_active_connection",
+			"led",
+			"rssi",
+			"exti",
+			"TIM_PWMIConfig",
+			"polarity",
+			"edge",
+			"TIM_ClearFlag",
+			"TIM_GetFlagStatus",
+			"flag",
+			"TIM_GetCapture",
+			"capture",
+			"tim9",
+			"tim12",
+			"tim3",
+			"tim2",
+			"tim12",
+			"tim",
+			"tim12",
+			"hmc5883",
+			"no-",
+			"HMC5883L",
+			"estimation.h",
+			"estimation",
+			"attitude_ekf",
+			"i2c_start",
+			"800444",
+			"vector",
+			"innov",
+			"theta",
+			"T2",
+			" ;",
+			"sensor",
+			"s16",
+			"sqrt",
+			"inno",
+			"T2",
+			"R21*Ss11 + R22*Ss12",
+			"R11*Ss11 + R12*Ss12",
+			"R01*Ss11 + R02*Ss12",
+			"R20*Ss00 + R21*Ss01 + R22*Ss02",
+			"R10*Ss00 + R11*Ss01 + R12*Ss02",
+			"R00*Ss00 + R01*Ss01 + R02*Ss02",
+			"Sensor_Raw_Data.",
+			"->",
+			" =",
+			"tmp",
+			"/tmp",
+			"uint32_t",
+			"mystr",
+			"generate",
+			"xusb",
+			"\"h\"",
+			"h",
+			"bUSBAvalible",
+			"parser_lookup",
+			"parser",
+			"lookup",
+			"circ",
+			"crc8",
+			"crc",
+			"priority"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"FLASH_DUMMY_BYTE",
+			"index",
+			"TIM_ClearITPendingBit",
+			"TIM_GetITStatus",
+			"HMC5983",
+			"T3",
+			"t3",
+			"t2",
+			"t1",
+			"t3",
+			"t2",
+			"t1",
+			"data->",
+			"."
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "main.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 939,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								866,
+								866
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6447,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5544,
+								5544
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 3181.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "mcuconf.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13103,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11108,
+								11108
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 4740.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "chconf.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15628,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								15591,
+								15591
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 8070.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "halconf.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9293,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3405,
+								3405
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4686.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 293.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "generic_sensor.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"serial",
+				"modules\\communication\\src\\serialmanager.c"
+			],
+			[
+				"statema",
+				"modules\\communication\\inc\\statemachine.h"
+			],
+			[
+				"generators",
+				"modules\\communication\\src\\statemachine_generators.c"
+			],
+			[
+				"sensor_read",
+				"modules\\sensors\\src\\sensor_read.c"
+			],
+			[
+				"control.c",
+				"modules\\control\\src\\control.c"
+			],
+			[
+				"state",
+				"modules\\communication\\inc\\statemachine.h"
+			],
+			[
+				"estimation.c",
+				"modules\\estimation\\src\\estimation.c"
+			],
+			[
+				"attitude",
+				"modules\\estimation\\src\\attitude_ekf.c"
+			],
+			[
+				"sensor_",
+				"modules\\sensors\\src\\sensor_read.c"
+			],
+			[
+				"gener",
+				"modules\\communication\\src\\statemachine_generators.c"
+			],
+			[
+				"parser",
+				"modules\\communication\\src\\statemachine_parsers.c"
+			],
+			[
+				"generato",
+				"modules\\communication\\src\\statemachine_generators.c"
+			],
+			[
+				"make",
+				"Makefile"
+			],
+			[
+				"conf",
+				"chconf.h"
+			],
+			[
+				"makefile",
+				"Makefile"
+			],
+			[
+				"sensor",
+				"modules\\sensors\\inc\\sensor_read.h"
+			],
+			[
+				"rc_in",
+				"modules\\rc_input\\inc\\rc_input.h"
+			],
+			[
+				"flash_save",
+				"modules\\external_flash\\src\\flash_save.c"
+			],
+			[
+				"pi.h",
+				"modules\\control\\inc\\pid.h"
+			],
+			[
+				"flash",
+				"modules\\external_flash\\src\\ext_flash.c"
+			],
+			[
+				"main",
+				"main.c"
+			],
+			[
+				"rcin",
+				"modules\\rc_input\\src\\rc_input.c"
+			],
+			[
+				"estimation.h",
+				"modules\\estimation\\inc\\estimation.h"
+			],
+			[
+				"pid.h",
+				"modules\\control\\inc\\pid.h"
+			],
+			[
+				"control.h",
+				"modules\\control\\inc\\control.h"
+			],
+			[
+				"contr",
+				"modules\\control\\src\\control.c"
+			],
+			[
+				"srekf_v3",
+				"srekf_v3.tex"
+			],
+			[
+				"box",
+				"BlocksStyle.tex"
+			],
+			[
+				"lines",
+				"LinesStyle.tex"
+			],
+			[
+				"line",
+				"LinesStyle.tex"
+			],
+			[
+				"figure",
+				"Figure_attitude_update.tex"
+			],
+			[
+				"sre",
+				"srekf_v3.tex"
+			],
+			[
+				".ld",
+				"make\\STM32F405xG.ld"
+			],
+			[
+				"ext_flash",
+				"modules\\external_flash\\inc\\ext_flash.h"
+			],
+			[
+				"save",
+				"modules\\external_flash\\src\\flash_save.c"
+			],
+			[
+				"control",
+				"modules\\control\\src\\control.c"
+			],
+			[
+				"ch",
+				"chconf.h"
+			],
+			[
+				"generat",
+				"Modules\\communication\\source\\statemachine_generators.c"
+			],
+			[
+				"quaternion",
+				"Modules\\math\\source\\quaternion.c"
+			],
+			[
+				"trig",
+				"Modules\\math\\include\\trigonometry.h"
+			],
+			[
+				"stm32",
+				"CMSIS\\stm32f4xx.h"
+			],
+			[
+				"pars",
+				"Modules\\communication\\source\\statemachine_parsers.c"
+			],
+			[
+				"manager",
+				"Modules\\communication\\include\\statemachine_generators.h"
+			],
+			[
+				"se",
+				"Modules\\communication\\include\\statemachine_types.h"
+			],
+			[
+				"ext",
+				"Modules\\external_flash\\source\\ext_flash.c"
+			],
+			[
+				"comlink",
+				"Modules\\communication\\include\\comlink.h"
+			],
+			[
+				"pwm",
+				"Modules\\hardware_drivers\\source\\pwm.c"
+			],
+			[
+				"usbd_core.h",
+				"Libraries\\STM32_USB_Device_Library\\Core\\inc\\usbd_core.h"
+			],
+			[
+				"usbd_usr.h",
+				"Libraries\\STM32_USB_Device_Library\\Core\\inc\\usbd_usr.h"
+			],
+			[
+				"usbd_ioreq.h",
+				"Libraries\\STM32_USB_Device_Library\\Core\\inc\\usbd_ioreq.h"
+			],
+			[
+				"usr",
+				"Modules\\usb\\source\\usbd_usr.c"
+			],
+			[
+				"coml",
+				"Modules\\communication\\source\\comlink.c"
+			],
+			[
+				"ain",
+				"Modules\\main\\include\\main.h"
+			],
+			[
+				"com",
+				"Modules\\communication\\source\\comlink.c"
+			],
+			[
+				"spi",
+				"Modules\\hardware_drivers\\source\\spi.c"
+			],
+			[
+				".s",
+				"CMSIS\\startup_stm32f4xx.s"
+			],
+			[
+				"tim",
+				"Libraries\\STM32F4xx_StdPeriph_Driver\\src\\stm32f4xx_tim.c"
+			],
+			[
+				"led",
+				"Modules\\hardware_drivers\\include\\led.h"
+			],
+			[
+				"freet",
+				"FreeRTOS\\include\\FreeRTOSConfig.h"
+			],
+			[
+				"stm32f",
+				"CMSIS\\stm32f4xx.h"
+			],
+			[
+				"ekf",
+				"Modules\\estimation\\source\\attitude_ekf.c"
+			],
+			[
+				"tri",
+				"Modules\\math\\source\\trigonometry.c"
+			],
+			[
+				"spi.h",
+				"Modules\\hardware_drivers\\include\\spi.h"
+			],
+			[
+				"estimna",
+				"Modules\\estimation\\source\\estimation.c"
+			],
+			[
+				"estim",
+				"Modules\\estimation\\include\\estimation.h"
+			],
+			[
+				"usbcdc",
+				"Modules\\usb\\source\\usbd_cdc.c"
+			],
+			[
+				"circular",
+				"Modules\\communication\\include\\circularbuffer.h"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 110.0,
+		"selected_items":
+		[
+			[
+				"APP_Rx",
+				"APP_RX_DATA_SIZE"
+			]
+		],
+		"width": 386.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 158.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
