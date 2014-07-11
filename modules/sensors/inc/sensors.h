@@ -9,7 +9,7 @@
 /* Module data structures and types.                                         */
 /*===========================================================================*/
 
-struct _sensor
+struct _sensor_calls
 {
     msg_t (* init_sensor)(void);
     msg_t (* read_sensor)(void);
@@ -18,7 +18,7 @@ struct _sensor
 typedef struct
 {
     uint16_t frequency_hz;
-    struct _sensor sensor;
+    struct _sensor_calls sensor;
     virtual_timer_t *polling_vt;
 } polled_sensor_t;
 
@@ -26,7 +26,7 @@ typedef struct
 {
     expchannel_t interrupt_channel;
     uint32_t mode;
-    struct _sensor sensor;
+    struct _sensor_calls sensor;
 } interrupt_sensor_t;
 
 /*===========================================================================*/
