@@ -12,7 +12,6 @@
 /* Module local definitions.                                                 */
 /*===========================================================================*/
 
-
 #define SRD_EXT_DRIVER              EXTD1
 
 /*===========================================================================*/
@@ -25,9 +24,59 @@ SensorReadDriver SRD1;
 /* Module local variables and types.                                         */
 /*===========================================================================*/
 
+THD_WORKING_AREA(waThreadSRD1, SRD_THREAD_STACKSIZE);
+
 /*===========================================================================*/
 /* Module local functions.                                                   */
 /*===========================================================================*/
+
+__attribute__((noreturn))
+static THD_FUNCTION(ThreadSRD1, arg)
+{
+    SensorReadDriver *srdp = (SensorReadDriver *)arg;
+    msg_t message;
+    _sensor_t *senp;
+#if SRD_DEBUG
+    chRegSetThreadName("ThreadSRD1");
+#endif
+
+    while (1)
+    {
+        /* Get the latest sensor read request */
+        chMBFetch(&srdp->srd_mailbox, &message, TIME_INFINITE);
+
+        /* Convert the message to a sensor pointer */
+        senp = (_sensor_t *)message;
+
+        /* Call its read function */
+        senp->read_sensor(senp->params);
+    }
+}
+
+/*===========================================================================*/
+/* Module local inline functions.                                                  */
+/*===========================================================================*/
+
+static inline const interrupt_sensor_t *extchannel2interrupt_sensor(SensorReadDriver *srdp,
+                                                                    expchannel_t ch)
+{
+    int8_t id = srdp->expchannel_lookup[ch];
+
+    if (id != -1)
+        return &srdp->interrupt_sensor_ptr[id];
+    else
+        return NULL;
+}
+
+static inline msg_t queueReadI(SensorReadDriver *srdp, const _sensor_t *senp)
+{
+    if (senp->priority_sensor == true)
+        /* Priority sensor, put it at the front of the queue */
+        return chMBPostAheadI(&srdp->srd_mailbox, (msg_t)senp);
+    else
+        /* Not a priority sensor, put it at the end of the queue */
+       return chMBPostI(&srdp->srd_mailbox, (msg_t)senp);
+}
 
 /*===========================================================================*/
 /* Module exported functions.                                                */
@@ -82,8 +131,8 @@ msg_t SensorsInit(SensorReadDriver *srdp,
             return MSG_TIMEOUT;
 
         /* Zero the accumulated ticks */
-        if (pollsenp[i].accumulated_ticks != NULL)
-            *(pollsenp[i].accumulated_ticks) = 0;
+        if (pollsenp[i].accumulator != NULL)
+            *(pollsenp[i].accumulator) = 0;
 
         /* Run sensor initialization with requested params */
         if (pollsenp[i].sensor.init_sensor != NULL)
@@ -97,8 +146,20 @@ msg_t SensorsInit(SensorReadDriver *srdp,
             chVTObjectInit(pollsenp[i].polling_vt);
     }
 
-    /* Everything OK, transverse the state */
+    /* Initialize the read mailbox */
+    chMBObjectInit(&srdp->srd_mailbox, srdp->messages, SRD_MAILBOX_SIZE);
+#if SRD_DEBUG
+    SRD1.dbg_mailbox_overflow = false;
+#endif
+
+    /* Everything OK, transverse the state and start the read thread */
     srdp->state = SRD_STOPPED;
+
+    chThdCreateStatic(waThreadSRD1,
+                      sizeof(waThreadSRD1), 
+                      SRD_THREAD_PRIORITY, 
+                      ThreadSRD1, 
+                      srdp);
 
     return MSG_OK;
 }
@@ -116,9 +177,9 @@ msg_t SensorsStart(SensorReadDriver *srdp)
 
         /* Enable timers for polled driven sensors */
         for (i = 0; i < srdp->polled_sensor_cnt; i++)
-            /* The parameter sent to the VT is the pointer to the
-               corresponding polled_sensor_t structure to be able to
-               access it from the callback function */
+            /* The parameter sent to the VT is the pointer to the corresponding
+               polled_sensor_t structure to be able to access it from the
+               callback function */
             chVTSet(srdp->polled_sensor_ptr[i].polling_vt,
                 CH_CFG_ST_FREQUENCY / srdp->polled_sensor_ptr[i].frequency_hz,
                 sensors_polled_callback,
@@ -148,8 +209,12 @@ msg_t SensorsStop(SensorReadDriver *srdp)
         for (i = 0; i < srdp->polled_sensor_cnt; i++)
             chVTReset(srdp->polled_sensor_ptr[i].polling_vt);
 
+        /* Reset the mailbox */
+        chMBReset(&srdp->srd_mailbox);
+
         /* Everything OK, transverse the state */
         srdp->state = SRD_STOPPED;
+
         return MSG_OK;    
     }
     else
@@ -158,15 +223,33 @@ msg_t SensorsStop(SensorReadDriver *srdp)
 
 void sensors_interrupt_callback(EXTDriver *extp, expchannel_t channel)
 {
-    /* Check if the driver is in the correct state, else disable the
-       interrupt */
+    const interrupt_sensor_t *p;
+    osalSysLockFromISR();
+
+    /* Check if the driver is in the correct state,
+       else disable the interrupt */
     if (SRD1.state == SRD_STARTED)
     {
-        osalSysLockFromISR();
-        osalSysUnlockFromISR();
+        p = extchannel2interrupt_sensor(&SRD1, channel);
+
+        if (p != NULL)
+        {
+            /* Tell the reading thread to read the sensor requested sensor */
+            if (queueReadI(&SRD1, &p->sensor) != MSG_OK)
+            {
+#if SRD_DEBUG
+                SRD1.dbg_mailbox_overflow = true;
+#endif
+            }
+        }
+        else
+            /* Something in the initial settings structures are faulty */
+            extChannelDisableI(extp, channel);    
     }
     else
-        extChannelDisable(extp, channel);
+        extChannelDisableI(extp, channel);
+
+    osalSysUnlockFromISR();
 }
 
 /**
@@ -177,24 +260,46 @@ void sensors_interrupt_callback(EXTDriver *extp, expchannel_t channel)
  */
 void sensors_polled_callback(void *param)
 {
-    polled_sensor_t *p = (polled_sensor_t *)param;
+    systime_t wait_time;
+    uint32_t frequency_hz;
 
-    /* Check if the driver is in the correct state, else don't restart the
-       timer to keep it off */
-    if (SRD1.state == SRD_STARTED)
+    /* Convert the parameter to the correct type */
+    const polled_sensor_t *p = (const polled_sensor_t *)param;
+
+    /* Check if the driver is in the correct state and that the polled sensor
+       pointer is correct, else don't restart the timer */
+    if ((SRD1.state == SRD_STARTED) && (p != NULL))
     {
         osalSysLockFromISR();
+        frequency_hz = p->frequency_hz;
+
+        /* Calculate the new virtual timer time */
+        wait_time = CH_CFG_ST_FREQUENCY / frequency_hz;
+
+        /* Calculate the accumulator correction */
+        if (p->accumulator != NULL)
+        {
+            *(p->accumulator) += CH_CFG_ST_FREQUENCY % frequency_hz;
+
+            if (*(p->accumulator) >= frequency_hz)
+            {
+                *(p->accumulator) -= frequency_hz;
+                wait_time += 1;
+            }
+        }
+
+        /* Reinitialize the virtual timer with the calculated wait time */
+        chVTSetI(p->polling_vt,
+                 wait_time,
+                 sensors_polled_callback,
+                 param);
 
         /* Tell the reading thread to read the sensor requested sensor */
-        if (p->sensor.priority_sensor == true)
+        if (queueReadI(&SRD1, &p->sensor) != MSG_OK)
         {
-            /* Priority sensor, put it to the front of the queue */
-            // chMBPostAhead();
-        }
-        else
-        {
-         /* Not a priority sensor, put it to the end of the queue */
-           // chMBPost();
+#if SRD_DEBUG
+            SRD1.dbg_mailbox_overflow = true;
+#endif
         }
     
         osalSysUnlockFromISR();

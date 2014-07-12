@@ -5,6 +5,11 @@
 /* Module global definitions.                                                */
 /*===========================================================================*/
 
+#define SRD_MAILBOX_SIZE        10
+#define SRD_THREAD_PRIORITY     HIGHPRIO
+#define SRD_THREAD_STACKSIZE    256
+#define SRD_DEBUG               TRUE
+
 /*===========================================================================*/
 /* Module data structures and types.                                         */
 /*===========================================================================*/
@@ -12,7 +17,7 @@
 /**
  * @brief Sensor functions, parameters and priorities configuration.
  */
-struct _sensor
+typedef struct
 {
     /**
      * @brief   Pointer to the initialization function of the sensor.
@@ -34,7 +39,7 @@ struct _sensor
      *          sensor reads to be put first in the read queue.
      */
     bool priority_sensor;
-};
+} _sensor_t;
 
 /**
  * @brief   Polled sensor configuration.
@@ -42,21 +47,25 @@ struct _sensor
 typedef struct
 {
     /**
-     * @brief   The number of Hertz the sensor will be read at.
+     * @brief   The sensor read rate.
+     * @note    The calculation av the time between reads is calculated by a
+     *          division with system tick: CH_CFG_ST_FREQUENCY / frequency_hz
+     *          This always rounds down if it is not a perfect division.
+     *          Ex, 1000 Hz tick and 90 Hz sensor rate will round to 90.9 Hz
      */
     uint32_t frequency_hz;
     /**
      * @brief   Pointer to an accumulation variable.
      * @details This is used if the sampling rate over time is important to
-     *          the senor. The accumulator will keep track of the delta times
+     *          the sensor. The accumulator will keep track of the delta times
      *          between executions and add extra delay to keep the average
      *          frequency to be the same as frequency_hz.
      */
-    uint32_t *accumulated_ticks;
+    uint32_t *accumulator;
     /**
      * @brief   Sensor configuration.
      */
-    struct _sensor sensor;
+    _sensor_t sensor;
     /**
      * @brief   Pointer to the virtual timer that keeps track of the read
      *          execution of the sensor.
@@ -76,7 +85,7 @@ typedef struct
     /**
      * @brief   Sensor configuration.
      */
-    struct _sensor sensor;
+    _sensor_t sensor;
 } interrupt_sensor_t;
 
 /**
@@ -128,6 +137,21 @@ typedef struct
      *          interrupt channel -> interrupt_sensor_ptr array index.
      */
     int8_t expchannel_lookup[EXT_MAX_CHANNELS];
+    /**
+     * @brief   Number of polled sensors.
+     */
+    mailbox_t srd_mailbox;
+    /**
+     * @brief   Number of polled sensors.
+     */
+    msg_t messages[SRD_MAILBOX_SIZE];
+#if SRD_DEBUG
+    /**
+     * @brief   Keeps the debug status of the mailbox in case of
+     *          to many requests.
+     */
+    bool dbg_mailbox_overflow;
+#endif
 } SensorReadDriver;
 
 /*===========================================================================*/
@@ -137,12 +161,10 @@ typedef struct
 #define COUNT_OF(array)         (sizeof(array)/sizeof(*(array)))
 
 /*===========================================================================*/
-/* Module inline functions.                                                  */
-/*===========================================================================*/
-
-/*===========================================================================*/
 /* External declarations.                                                    */
 /*===========================================================================*/
+
+extern SensorReadDriver SRD1;
 
 msg_t SensorsInit(SensorReadDriver *srdp,
                   const interrupt_sensor_t *intsenp,
@@ -153,5 +175,9 @@ msg_t SensorsStart(SensorReadDriver *srdp);
 msg_t SensorsStop(SensorReadDriver *srdp);
 void sensors_interrupt_callback(EXTDriver *extp, expchannel_t channel);
 void sensors_polled_callback(void *param);
+
+/*===========================================================================*/
+/* Module exported inline functions.                                                  */
+/*===========================================================================*/
 
 #endif /* __SENSORS_H */

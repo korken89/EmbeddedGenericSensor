@@ -16,7 +16,7 @@ static uint32_t polled1_accumulator;
 static const polled_sensor_t polled_sensors[] = {
     {
         .frequency_hz = 80,
-        .accumulated_ticks = &polled1_accumulator,
+        .accumulator = &polled1_accumulator,
         .sensor = {
             .init_sensor = my_polled_sensor1_init,
             .read_sensor = my_polled_sensor1_read,
@@ -27,7 +27,7 @@ static const polled_sensor_t polled_sensors[] = {
     },
     {
         .frequency_hz = 10,
-        .accumulated_ticks = NULL,
+        .accumulator = NULL,
         .sensor = {
             .init_sensor = my_polled_sensor2_init,
             .read_sensor = my_polled_sensor2_read,
@@ -64,7 +64,7 @@ int main(void)
      * 
      */
     usbDisconnectBus(serusbcfg.usbp);
-    chThdSleepMilliseconds(500);
+    chThdSleepMilliseconds(1000);
     usbStart(serusbcfg.usbp, &usbcfg);
     usbConnectBus(serusbcfg.usbp);
 
