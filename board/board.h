@@ -18,7 +18,7 @@
 #define _BOARD_H_
 
 /*
- * Setup for STMicroelectronics STM32F4-Discovery board.
+ * Setup for KFly r3.1 board. By Emil Fresk.
  */
 
 /*
