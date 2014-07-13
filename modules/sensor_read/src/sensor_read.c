@@ -159,7 +159,7 @@ void sensors_interrupt_callback(EXTDriver *extp, expchannel_t channel)
             if (queueReadI(&SRD1, &p->sensor) != MSG_OK)
             {
 #if SRD_DEBUG
-                srdp->dbg_mailbox_overflow = true;
+                SRD1.dbg_mailbox_overflow = true;
 #endif
             }
         }
