@@ -160,7 +160,7 @@ void sensor_read_interrupt_callbackI(SensorReadDriver *srdp,
             if (queueReadI(srdp, &p->sensor) != MSG_OK)
             {
 #if SRD_DEBUG
-                SRD1.dbg_mailbox_overflow = true;
+                srdp->dbg_mailbox_overflow = true;
 #endif
             }
         }
