@@ -14,8 +14,8 @@
     limitations under the License.
 */
 
-#ifndef __SENSORS_H
-#define __SENSORS_H
+#ifndef __SENSOR_READ_H
+#define __SENSOR_READ_H
 
 /*===========================================================================*/
 /* Driver global definitions.                                                */
@@ -221,6 +221,7 @@ msg_t SensorReadInjectReadS(SensorReadDriver *srdp,
 #ifdef __cplusplus
 }
 #endif
+
 /*===========================================================================*/
 /* Driver exported inline functions.                                         */
 /*===========================================================================*/
@@ -254,4 +255,4 @@ static inline msg_t SensorReadInjectRead(SensorReadDriver *srdp,
     return rdymsg;
 }
 
-#endif /* __SENSORS_H */
+#endif /* __SENSOR_READ_H */
