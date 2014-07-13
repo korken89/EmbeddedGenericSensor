@@ -75,7 +75,7 @@ typedef struct
      *          sensor reads to be put first in the read queue.
      */
     bool priority_sensor;
-} sensor_t;
+} generic_sensor_t;
 
 /**
  * @brief   Polled sensor configuration.
@@ -101,7 +101,7 @@ typedef struct
     /**
      * @brief   Sensor configuration.
      */
-    sensor_t sensor;
+    generic_sensor_t sensor;
     /**
      * @brief   Pointer to the virtual timer that keeps track of the read
      *          execution of the sensor.
@@ -121,7 +121,7 @@ typedef struct
     /**
      * @brief   Sensor configuration.
      */
-    sensor_t sensor;
+    generic_sensor_t sensor;
 } interrupt_sensor_t;
 
 /**
@@ -214,9 +214,10 @@ msg_t SensorReadInit(SensorReadDriver *srdp,
                      size_t pollsencnt);
 msg_t SensorReadStart(SensorReadDriver *srdp);
 msg_t SensorReadStop(SensorReadDriver *srdp);
-msg_t SensorReadInjectReadI(SensorReadDriver *srdp, const sensor_t *senp);
+msg_t SensorReadInjectReadI(SensorReadDriver *srdp,
+                            const generic_sensor_t *senp);
 msg_t SensorReadInjectReadS(SensorReadDriver *srdp,
-                            const sensor_t *senp,
+                            const generic_sensor_t *senp,
                             systime_t time);
 #ifdef __cplusplus
 }
@@ -230,7 +231,7 @@ msg_t SensorReadInjectReadS(SensorReadDriver *srdp,
  * @brief           Queues a sensor read to the reading thread.
  * 
  * @param[in] srdp  Pointer to the SensorReadDriver object.
- * @param[in] senp  Pointer the sensor_t object to be queued.
+ * @param[in] senp  Pointer the generic_sensor_t object to be queued.
  * @param[in] time  The number of ticks before the opertion timeouts.
  *                  TIME_IMMEDIATE and TIME_INFINITE is allowed.
  * 
@@ -243,7 +244,7 @@ msg_t SensorReadInjectReadS(SensorReadDriver *srdp,
  * @api
  */
 static inline msg_t SensorReadInjectRead(SensorReadDriver *srdp,
-                                         const sensor_t *senp,
+                                         const generic_sensor_t *senp,
                                          systime_t time)
 {
     msg_t rdymsg;

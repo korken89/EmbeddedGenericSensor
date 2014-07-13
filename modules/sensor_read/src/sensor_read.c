@@ -62,7 +62,7 @@ static THD_FUNCTION(ThreadSRD1, arg)
 {
     SensorReadDriver *srdp = (SensorReadDriver *)arg;
     msg_t message;
-    sensor_t *senp;
+    generic_sensor_t *senp;
 #if SRD_DEBUG
     chRegSetThreadName("ThreadSRD1");
 #endif
@@ -73,7 +73,7 @@ static THD_FUNCTION(ThreadSRD1, arg)
         chMBFetch(&srdp->srd_mailbox, &message, TIME_INFINITE);
 
         /* Convert the message to a sensor pointer */
-        senp = (sensor_t *)message;
+        senp = (generic_sensor_t *)message;
 
         /* Call its read function */
         senp->read_sensor(senp->params);
@@ -111,7 +111,7 @@ const interrupt_sensor_t *extchannel2interrupt_sensor(SensorReadDriver *srdp,
  * @brief           Queues a sensor read to the reading thread.
  * 
  * @param[in] srdp  Pointer to the SensorReadDriver object.
- * @param[in] senp  Pointer the sensor_t object to be queued.
+ * @param[in] senp  Pointer the generic_sensor_t object to be queued.
  * 
  * @return              The operation status.
  * @retval MSG_OK       If a read request has been correctly queued.
@@ -119,7 +119,8 @@ const interrupt_sensor_t *extchannel2interrupt_sensor(SensorReadDriver *srdp,
  * 
  * @iclass
  */
-static inline msg_t queueReadI(SensorReadDriver *srdp, const sensor_t *senp)
+static inline msg_t queueReadI(SensorReadDriver *srdp,
+                               const generic_sensor_t *senp)
 {
     if (senp->priority_sensor == true)
         /* Priority sensor, put it at the front of the queue */
@@ -440,7 +441,7 @@ msg_t SensorReadStop(SensorReadDriver *srdp)
  * @brief           Queues a sensor read to the reading thread.
  * 
  * @param[in] srdp  Pointer to the SensorReadDriver object.
- * @param[in] senp  Pointer the sensor_t object to be queued.
+ * @param[in] senp  Pointer the generic_sensor_t object to be queued.
  * 
  * @return              The operation status.
  * @retval MSG_OK       If a read request has been correctly queued.
@@ -448,7 +449,8 @@ msg_t SensorReadStop(SensorReadDriver *srdp)
  * 
  * @iclass
  */
-msg_t SensorReadInjectReadI(SensorReadDriver *srdp, const sensor_t *senp)
+msg_t SensorReadInjectReadI(SensorReadDriver *srdp,
+                            const generic_sensor_t *senp)
 {
     return queueReadI(srdp, senp);
 }
@@ -457,7 +459,7 @@ msg_t SensorReadInjectReadI(SensorReadDriver *srdp, const sensor_t *senp)
  * @brief           Queues a sensor read to the reading thread.
  * 
  * @param[in] srdp  Pointer to the SensorReadDriver object.
- * @param[in] senp  Pointer the sensor_t object to be queued.
+ * @param[in] senp  Pointer the generic_sensor_t object to be queued.
  * @param[in] time  The number of ticks before the opertion timeouts.
  *                  TIME_IMMEDIATE and TIME_INFINITE is allowed.
  * 
@@ -470,7 +472,7 @@ msg_t SensorReadInjectReadI(SensorReadDriver *srdp, const sensor_t *senp)
  * @sclass
  */
 msg_t SensorReadInjectReadS(SensorReadDriver *srdp,
-                            const sensor_t *senp,
+                            const generic_sensor_t *senp,
                             systime_t time)
 {
     if (senp->priority_sensor == true)
