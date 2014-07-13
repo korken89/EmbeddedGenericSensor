@@ -127,7 +127,7 @@ static inline msg_t queueReadI(SensorReadDriver *srdp,
         return chMBPostAheadI(&srdp->srd_mailbox, (msg_t)senp);
     else
         /* Not a priority sensor, put it at the end of the queue */
-       return chMBPostI(&srdp->srd_mailbox, (msg_t)senp);
+        return chMBPostI(&srdp->srd_mailbox, (msg_t)senp);
 }
 
 /*===========================================================================*/
@@ -480,5 +480,5 @@ msg_t SensorReadInjectReadS(SensorReadDriver *srdp,
         return chMBPostAheadS(&srdp->srd_mailbox, (msg_t)senp, time);
     else
         /* Not a priority sensor, put it at the end of the queue */
-       return chMBPostS(&srdp->srd_mailbox, (msg_t)senp, time);
+        return chMBPostS(&srdp->srd_mailbox, (msg_t)senp, time);
 }
