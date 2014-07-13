@@ -2,16 +2,36 @@
 #define __SENSORS_H
 
 /*===========================================================================*/
-/* Module global definitions.                                                */
+/* Driver global definitions.                                                */
 /*===========================================================================*/
 
-#define SRD_MAILBOX_SIZE        10
-#define SRD_THREAD_PRIORITY     HIGHPRIO
-#define SRD_THREAD_STACKSIZE    256
-#define SRD_DEBUG               TRUE
+/**
+ * @brief   Sensor read thread priority setting
+ */
+#define SRD_THREAD_PRIORITY                     HIGHPRIO
+/**
+ * @brief   Sensor read thread stack size.
+ * @details This depends on the implementation of read_sensor in each
+ *          sensor implementation and the stack it needs. 
+ */
+#define SRD_THREAD_STACKSIZE                    256
+/**
+ * @brief   Definition for the ext-driver for easy change
+ */
+#define SRD_EXT_DRIVER                          EXTD1
+/**
+ * @brief   Size of the sensor read queue.
+ * @details Should be the same as the number of sensors plus a little overhead.
+ */
+#define SRD_MAILBOX_SIZE                        10
+/**
+ * @brief   Enables/disables debug features in the module. Disabling this
+ *          generates a smaller and faster code.
+ */
+#define SRD_DEBUG                               TRUE
 
 /*===========================================================================*/
-/* Module data structures and types.                                         */
+/* Driver data structures and types.                                         */
 /*===========================================================================*/
 
 /**
@@ -39,7 +59,7 @@ typedef struct
      *          sensor reads to be put first in the read queue.
      */
     bool priority_sensor;
-} _sensor_t;
+} sensor_t;
 
 /**
  * @brief   Polled sensor configuration.
@@ -65,7 +85,7 @@ typedef struct
     /**
      * @brief   Sensor configuration.
      */
-    _sensor_t sensor;
+    sensor_t sensor;
     /**
      * @brief   Pointer to the virtual timer that keeps track of the read
      *          execution of the sensor.
@@ -85,7 +105,7 @@ typedef struct
     /**
      * @brief   Sensor configuration.
      */
-    _sensor_t sensor;
+    sensor_t sensor;
 } interrupt_sensor_t;
 
 /**
@@ -155,17 +175,17 @@ typedef struct
 } SensorReadDriver;
 
 /*===========================================================================*/
-/* Module macros.                                                            */
+/* Driver macros.                                                            */
 /*===========================================================================*/
 
-#define COUNT_OF(array)         (sizeof(array)/sizeof(*(array)))
-
 /*===========================================================================*/
-/* External declarations.                                                    */
+/* Driver declarations.                                                      */
 /*===========================================================================*/
 
 extern SensorReadDriver SRD1;
 
+void sensors_interrupt_callback(EXTDriver *extp, expchannel_t channel);
+void SensorObjectInit(SensorReadDriver *srdp);
 msg_t SensorsInit(SensorReadDriver *srdp,
                   const interrupt_sensor_t *intsenp,
                   const polled_sensor_t *pollsenp,
@@ -173,11 +193,42 @@ msg_t SensorsInit(SensorReadDriver *srdp,
                   size_t pollsencnt);
 msg_t SensorsStart(SensorReadDriver *srdp);
 msg_t SensorsStop(SensorReadDriver *srdp);
-void sensors_interrupt_callback(EXTDriver *extp, expchannel_t channel);
-void sensors_polled_callback(void *param);
+msg_t SensorsInjectReadI(SensorReadDriver *srdp, const sensor_t *senp);
+msg_t SensorsInjectReadS(SensorReadDriver *srdp,
+                         const sensor_t *senp,
+                         systime_t time);
 
 /*===========================================================================*/
-/* Module exported inline functions.                                                  */
+/* Driver exported inline functions.                                         */
 /*===========================================================================*/
+
+/**
+ * @brief           Queues a sensor read to the reading thread.
+ * 
+ * @param[in] srdp  Pointer to the SensorReadDriver object.
+ * @param[in] senp  Pointer the sensor_t object to be queued.
+ * @param[in] time  The number of ticks before the opertion timeouts.
+ *                  TIME_IMMEDIATE and TIME_INFINITE is allowed.
+ * 
+ * @return              The operation status.
+ * @retval MSG_OK       If a read request has been correctly queued.
+ * @retval MSG_RESET    If the queue has been reset while waiting.
+ * @retval MSG_TIMEOUT  If the queue operation timed out and the request
+ *                      cannot be queued.
+ * 
+ * @api
+ */
+static inline msg_t SensorsInjectRead(SensorReadDriver *srdp,
+                                      const sensor_t *senp,
+                                      systime_t time)
+{
+    msg_t rdymsg;
+
+    chSysLock();
+    rdymsg = SensorsInjectReadS(srdp, senp, time);
+    chSysUnlock();
+
+    return rdymsg;
+}
 
 #endif /* __SENSORS_H */

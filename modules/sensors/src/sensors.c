@@ -1,6 +1,6 @@
 /* *
  *
- * Abstraction Layer for Sensor Initialization and Reading.
+ * Abstraction Layer for sensor initialization and reading driver.
  *
  * */
 
@@ -9,33 +9,43 @@
 #include "sensors.h"
 
 /*===========================================================================*/
-/* Module local definitions.                                                 */
+/* Driver local definitions.                                                 */
 /*===========================================================================*/
 
-#define SRD_EXT_DRIVER              EXTD1
-
 /*===========================================================================*/
-/* Module exported variables.                                                */
+/* Driver exported variables.                                                */
 /*===========================================================================*/
 
+/**
+ * @brief   SRD1 driver identifier.
+ */
 SensorReadDriver SRD1;
 
 /*===========================================================================*/
-/* Module local variables and types.                                         */
+/* Driver local variables and types.                                         */
 /*===========================================================================*/
 
+/**
+ * @brief   SRD1 thread work area.
+ */
 THD_WORKING_AREA(waThreadSRD1, SRD_THREAD_STACKSIZE);
 
 /*===========================================================================*/
-/* Module local functions.                                                   */
+/* Driver local functions.                                                   */
 /*===========================================================================*/
 
+/**
+ * @brief           The thread that reads the sensors beeing queued
+ *                  by the drier.
+ * 
+ * @param[in] arg   Pointer to the SensorReadDriver object.
+ */
 __attribute__((noreturn))
 static THD_FUNCTION(ThreadSRD1, arg)
 {
     SensorReadDriver *srdp = (SensorReadDriver *)arg;
     msg_t message;
-    _sensor_t *senp;
+    sensor_t *senp;
 #if SRD_DEBUG
     chRegSetThreadName("ThreadSRD1");
 #endif
@@ -46,7 +56,7 @@ static THD_FUNCTION(ThreadSRD1, arg)
         chMBFetch(&srdp->srd_mailbox, &message, TIME_INFINITE);
 
         /* Convert the message to a sensor pointer */
-        senp = (_sensor_t *)message;
+        senp = (sensor_t *)message;
 
         /* Call its read function */
         senp->read_sensor(senp->params);
@@ -54,11 +64,23 @@ static THD_FUNCTION(ThreadSRD1, arg)
 }
 
 /*===========================================================================*/
-/* Module local inline functions.                                                  */
+/* Driver local inline functions.                                            */
 /*===========================================================================*/
 
-static inline const interrupt_sensor_t *extchannel2interrupt_sensor(SensorReadDriver *srdp,
-                                                                    expchannel_t ch)
+/**
+ * @brief           Converts a EXT channel to the corresponding
+ *                  interrupt_sensor_t pointer.
+ * 
+ * @param[in] srdp  Pointer to the SensorReadDriver object.
+ * @param[in] ch    Channel to convert.
+ * 
+ * @return          Pointer to the corresponding interrupt_sensor_t object.
+ * @retval NULL     If there was no interrupt_sensor_t object associated with
+ *                  the inputed channel.
+ */
+static inline
+const interrupt_sensor_t *extchannel2interrupt_sensor(SensorReadDriver *srdp,
+                                                      expchannel_t ch)
 {
     int8_t id = srdp->expchannel_lookup[ch];
 
@@ -68,7 +90,19 @@ static inline const interrupt_sensor_t *extchannel2interrupt_sensor(SensorReadDr
         return NULL;
 }
 
-static inline msg_t queueReadI(SensorReadDriver *srdp, const _sensor_t *senp)
+/**
+ * @brief           Queues a sensor read to the reading thread.
+ * 
+ * @param[in] srdp  Pointer to the SensorReadDriver object.
+ * @param[in] senp  Pointer the sensor_t object to be queued.
+ * 
+ * @return              The operation status.
+ * @retval MSG_OK       If a read request has been correctly queued.
+ * @retval MSG_TIMEOUT  If the queue is full and the request cannot be queued.
+ * 
+ * @iclass
+ */
+static inline msg_t queueReadI(SensorReadDriver *srdp, const sensor_t *senp)
 {
     if (senp->priority_sensor == true)
         /* Priority sensor, put it at the front of the queue */
@@ -79,8 +113,146 @@ static inline msg_t queueReadI(SensorReadDriver *srdp, const _sensor_t *senp)
 }
 
 /*===========================================================================*/
-/* Module exported functions.                                                */
+/* Driver interrupt handlers.                                                */
 /*===========================================================================*/
+
+/**
+ * @brief               Interrupt callback to be used in the EXT driver config
+ *                      for sensor reads. Used with interrupt driven sensors.
+ * 
+ * @param[in] extp      Pointer to the EXTDriver object.
+ * @param[in] channel   Pointer the ext channel.
+ * 
+ * 
+ */
+void sensors_interrupt_callback(EXTDriver *extp, expchannel_t channel)
+{
+    const interrupt_sensor_t *p;
+    osalSysLockFromISR();
+
+    /* Check if the driver is in the correct state,
+       else disable the interrupt */
+    if (SRD1.state == SRD_STARTED)
+    {
+        p = extchannel2interrupt_sensor(&SRD1, channel);
+
+        if (p != NULL)
+        {
+            /* Tell the reading thread to read the sensor requested sensor */
+            if (queueReadI(&SRD1, &p->sensor) != MSG_OK)
+            {
+#if SRD_DEBUG
+                SRD1.dbg_mailbox_overflow = true;
+#endif
+            }
+        }
+        else
+            /* Something in the initial settings structures are faulty */
+            extChannelDisableI(extp, channel);    
+    }
+    else
+        extChannelDisableI(extp, channel);
+
+    osalSysUnlockFromISR();
+}
+
+/**
+ * @brief               Virtual timer callback function for sensor reads.
+ * 
+ * @param[in] param     Input parameter pointing to the corresponding
+ *                      polled_sensor_t configuration.
+ */
+static void sensors_polled_callback(void *param)
+{
+    systime_t wait_time;
+    uint32_t frequency_hz;
+
+    /* Convert the parameter to the correct type */
+    const polled_sensor_t *p = (const polled_sensor_t *)param;
+
+    /* Check if the driver is in the correct state and that the polled sensor
+       pointer is correct, else don't restart the timer */
+    if ((SRD1.state == SRD_STARTED) && (p != NULL))
+    {
+        osalSysLockFromISR();
+        frequency_hz = p->frequency_hz;
+
+        /* Calculate the new virtual timer time */
+        wait_time = CH_CFG_ST_FREQUENCY / frequency_hz;
+
+        /* Calculate the accumulator correction */
+        if (p->accumulator != NULL)
+        {
+            *(p->accumulator) += CH_CFG_ST_FREQUENCY % frequency_hz;
+
+            if (*(p->accumulator) >= frequency_hz)
+            {
+                *(p->accumulator) -= frequency_hz;
+                wait_time += 1;
+            }
+        }
+
+        /* Reinitialize the virtual timer with the calculated wait time */
+        chVTSetI(p->polling_vt,
+                 wait_time,
+                 sensors_polled_callback,
+                 param);
+
+        /* Tell the reading thread to read the sensor requested sensor */
+        if (queueReadI(&SRD1, &p->sensor) != MSG_OK)
+        {
+#if SRD_DEBUG
+            SRD1.dbg_mailbox_overflow = true;
+#endif
+        }
+    
+        osalSysUnlockFromISR();
+    }
+}
+
+/*===========================================================================*/
+/* Driver exported functions.                                                */
+/*===========================================================================*/
+
+/**
+ * @brief           Initializes the SensorReadDriver object.
+ * @note            This in done explicitly in SensorsInit.
+ * 
+ * @param[in] srdp  Pointer to the SensorReadDriver object.
+ * 
+ * @init
+ */
+void SensorObjectInit(SensorReadDriver *srdp)
+{
+    size_t i;
+    srdp->state = SRD_UNINITIALIZED;
+    srdp->interrupt_sensor_ptr = NULL;
+    srdp->polled_sensor_ptr = NULL;
+    srdp->interrupt_sensor_cnt = 0;
+    srdp->polled_sensor_cnt = 0;
+    for (i = 0; i < EXT_MAX_CHANNELS; i++)
+        srdp->expchannel_lookup[i] = -1;
+    chMBObjectInit(&srdp->srd_mailbox, srdp->messages, SRD_MAILBOX_SIZE);
+#if SRD_DEBUG
+    SRD1.dbg_mailbox_overflow = false;
+#endif
+}
+
+/**
+ * @brief                   Initializes the sensor read functionallity.
+ * 
+ * @param[in] srdp          Pointer to the SensorReadDriver object.
+ * @param[in] intsenp       Pointer to the interrupt sensor read configuration.
+ * @param[in] pollsenp      Pointer to the polled sensor read configuration.
+ * @param[in] intsencnt     Number of interrupt driven sensors.
+ * @param[in] pollsencnt    Number of polled driven sensors.
+ * 
+ * @return                  The operation status.
+ * @retval MSG_OK           The initialization was successful.
+ * @retval MSG_RESET        Something went wrong during the initialization.
+ * 
+ * @api
+ */
 msg_t SensorsInit(SensorReadDriver *srdp,
                   const interrupt_sensor_t *intsenp,
                   const polled_sensor_t *pollsenp,
@@ -88,6 +260,7 @@ msg_t SensorsInit(SensorReadDriver *srdp,
                   size_t pollsencnt)
 {
     chDbgCheck(srdp != NULL);
+    chDbgCheck(srdp->state == SRD_UNINITIALIZED);
     chDbgAssert((intsenp == NULL) && (intsencnt != 0),
                 "Pointer can't be NULL when the count is > 0");
     chDbgAssert((pollsenp == NULL) && (pollsencnt != 0),
@@ -95,10 +268,6 @@ msg_t SensorsInit(SensorReadDriver *srdp,
     
     size_t i;
     msg_t retval;
-
-    /* Initialize lookup table */
-    for (i = 0; i < EXT_MAX_CHANNELS; i++)
-        srdp->expchannel_lookup[i] = -1;
 
     /* Generate interrupt channel -> array index table */
     for (i = 0; i < intsencnt; i++)
@@ -146,12 +315,6 @@ msg_t SensorsInit(SensorReadDriver *srdp,
             chVTObjectInit(pollsenp[i].polling_vt);
     }
 
-    /* Initialize the read mailbox */
-    chMBObjectInit(&srdp->srd_mailbox, srdp->messages, SRD_MAILBOX_SIZE);
-#if SRD_DEBUG
-    SRD1.dbg_mailbox_overflow = false;
-#endif
-
     /* Everything OK, transverse the state and start the read thread */
     srdp->state = SRD_STOPPED;
 
@@ -164,9 +327,24 @@ msg_t SensorsInit(SensorReadDriver *srdp,
     return MSG_OK;
 }
 
+/**
+ * @brief               Starts the interrupts and timers so sensors will be 
+ *                      serviced.
+ * 
+ * @param[in] srdp      Pointer to the SensorReadDriver object.
+ * 
+ * @return              The operation status.
+ * @retval MSG_OK       The enabling of interrupts and starting of the
+ *                      virtual timers was successful.
+ * @retval MSG_RESET    The driver was not in the correct state.
+ * 
+ * @api
+ */
 msg_t SensorsStart(SensorReadDriver *srdp)
 {
     size_t i;
+
+    chDbgCheck(srdp != NULL);
 
     if (srdp->state == SRD_STOPPED)
     {
@@ -194,20 +372,40 @@ msg_t SensorsStart(SensorReadDriver *srdp)
         return MSG_RESET;
 }
 
+/**
+ * @brief               Stops the interrupts and timers so sensors will stop 
+ *                      beeing serviced. The queued sensor reads are lost as
+ *                      well.
+ * 
+ * @param[in] srdp      Pointer to the SensorReadDriver object.
+ * 
+ * @return              The operation status.
+ * @retval MSG_OK       The disabling of interrupts and starting of the
+ *                      virtual timers was successful.
+ * @retval MSG_RESET    The driver was not in the correct state.
+ * 
+ * @api
+ */
 msg_t SensorsStop(SensorReadDriver *srdp)
 {
     size_t i;
 
+    chDbgCheck(srdp != NULL);
+
     if (srdp->state == SRD_STARTED)
     {
+        osalSysLock();
+
         /* Disable interrupts for interrupt driven sensors */
         for (i = 0; i < srdp->interrupt_sensor_cnt; i++)
-            extChannelDisable(&SRD_EXT_DRIVER,
+            extChannelDisableI(&SRD_EXT_DRIVER,
                               srdp->interrupt_sensor_ptr[i].interrupt_channel);
 
         /* Reset timers for polled driven sensors */
         for (i = 0; i < srdp->polled_sensor_cnt; i++)
-            chVTReset(srdp->polled_sensor_ptr[i].polling_vt);
+            chVTResetI(srdp->polled_sensor_ptr[i].polling_vt);
+
+        osalSysUnlock();
 
         /* Reset the mailbox */
         chMBReset(&srdp->srd_mailbox);
@@ -221,87 +419,47 @@ msg_t SensorsStop(SensorReadDriver *srdp)
         return MSG_RESET;
 }
 
-void sensors_interrupt_callback(EXTDriver *extp, expchannel_t channel)
+/**
+ * @brief           Queues a sensor read to the reading thread.
+ * 
+ * @param[in] srdp  Pointer to the SensorReadDriver object.
+ * @param[in] senp  Pointer the sensor_t object to be queued.
+ * 
+ * @return              The operation status.
+ * @retval MSG_OK       If a read request has been correctly queued.
+ * @retval MSG_TIMEOUT  If the queue is full and the request cannot be queued.
+ * 
+ * @iclass
+ */
+msg_t SensorsInjectReadI(SensorReadDriver *srdp, const sensor_t *senp)
 {
-    const interrupt_sensor_t *p;
-    osalSysLockFromISR();
-
-    /* Check if the driver is in the correct state,
-       else disable the interrupt */
-    if (SRD1.state == SRD_STARTED)
-    {
-        p = extchannel2interrupt_sensor(&SRD1, channel);
-
-        if (p != NULL)
-        {
-            /* Tell the reading thread to read the sensor requested sensor */
-            if (queueReadI(&SRD1, &p->sensor) != MSG_OK)
-            {
-#if SRD_DEBUG
-                SRD1.dbg_mailbox_overflow = true;
-#endif
-            }
-        }
-        else
-            /* Something in the initial settings structures are faulty */
-            extChannelDisableI(extp, channel);    
-    }
-    else
-        extChannelDisableI(extp, channel);
-
-    osalSysUnlockFromISR();
+    return queueReadI(srdp, senp);
 }
 
 /**
- * @brief               Virtual timer callback function for sensor reads.
+ * @brief           Queues a sensor read to the reading thread.
  * 
- * @param[in] param     Input parameter pointing to the corresponding
- *                      polled_sensor_t configuration.
+ * @param[in] srdp  Pointer to the SensorReadDriver object.
+ * @param[in] senp  Pointer the sensor_t object to be queued.
+ * @param[in] time  The number of ticks before the opertion timeouts.
+ *                  TIME_IMMEDIATE and TIME_INFINITE is allowed.
+ * 
+ * @return              The operation status.
+ * @retval MSG_OK       If a read request has been correctly queued.
+ * @retval MSG_RESET    If the queue has been reset while waiting.
+ * @retval MSG_TIMEOUT  If the queue operation timed out and the request
+ *                      cannot be queued.
+ * 
+ * @sclass
  */
-void sensors_polled_callback(void *param)
+msg_t SensorsInjectReadS(SensorReadDriver *srdp,
+                         const sensor_t *senp,
+                         systime_t time)
 {
-    systime_t wait_time;
-    uint32_t frequency_hz;
-
-    /* Convert the parameter to the correct type */
-    const polled_sensor_t *p = (const polled_sensor_t *)param;
-
-    /* Check if the driver is in the correct state and that the polled sensor
-       pointer is correct, else don't restart the timer */
-    if ((SRD1.state == SRD_STARTED) && (p != NULL))
-    {
-        osalSysLockFromISR();
-        frequency_hz = p->frequency_hz;
-
-        /* Calculate the new virtual timer time */
-        wait_time = CH_CFG_ST_FREQUENCY / frequency_hz;
-
-        /* Calculate the accumulator correction */
-        if (p->accumulator != NULL)
-        {
-            *(p->accumulator) += CH_CFG_ST_FREQUENCY % frequency_hz;
-
-            if (*(p->accumulator) >= frequency_hz)
-            {
-                *(p->accumulator) -= frequency_hz;
-                wait_time += 1;
-            }
-        }
-
-        /* Reinitialize the virtual timer with the calculated wait time */
-        chVTSetI(p->polling_vt,
-                 wait_time,
-                 sensors_polled_callback,
-                 param);
-
-        /* Tell the reading thread to read the sensor requested sensor */
-        if (queueReadI(&SRD1, &p->sensor) != MSG_OK)
-        {
-#if SRD_DEBUG
-            SRD1.dbg_mailbox_overflow = true;
-#endif
-        }
-    
-        osalSysUnlockFromISR();
-    }
+    if (senp->priority_sensor == true)
+        /* Priority sensor, put it at the front of the queue */
+        return chMBPostAheadS(&srdp->srd_mailbox, (msg_t)senp, time);
+    else
+        /* Not a priority sensor, put it at the end of the queue */
+       return chMBPostS(&srdp->srd_mailbox, (msg_t)senp, time);
 }
