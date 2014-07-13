@@ -140,23 +140,24 @@ static inline msg_t queueReadI(SensorReadDriver *srdp, const sensor_t *senp)
  * @param[in] extp      Pointer to the EXTDriver object.
  * @param[in] channel   Pointer the ext channel.
  * 
- * 
+ * @iclass
  */
-void sensors_interrupt_callback(EXTDriver *extp, expchannel_t channel)
+void sensor_read_interrupt_callbackI(SensorReadDriver *srdp,
+                                     EXTDriver *extp,
+                                     expchannel_t channel)
 {
     const interrupt_sensor_t *p;
-    osalSysLockFromISR();
 
     /* Check if the driver is in the correct state,
        else disable the interrupt */
-    if (SRD1.state == SRD_STARTED)
+    if (srdp->state == SRD_STARTED)
     {
-        p = extchannel2interrupt_sensor(&SRD1, channel);
+        p = extchannel2interrupt_sensor(srdp, channel);
 
         if (p != NULL)
         {
             /* Tell the reading thread to read the sensor requested sensor */
-            if (queueReadI(&SRD1, &p->sensor) != MSG_OK)
+            if (queueReadI(srdp, &p->sensor) != MSG_OK)
             {
 #if SRD_DEBUG
                 SRD1.dbg_mailbox_overflow = true;
@@ -169,8 +170,6 @@ void sensors_interrupt_callback(EXTDriver *extp, expchannel_t channel)
     }
     else
         extChannelDisableI(extp, channel);
-
-    osalSysUnlockFromISR();
 }
 
 /**

@@ -205,7 +205,9 @@ extern SensorReadDriver SRD1;
 #ifdef __cplusplus
 extern "C" {
 #endif
-void sensor_read_interrupt_callback(EXTDriver *extp, expchannel_t channel);
+void sensor_read_interrupt_callbackI(SensorReadDriver *srdp,
+                                    EXTDriver *extp,
+                                    expchannel_t channel);
 void SensorReadObjectInit(SensorReadDriver *srdp);
 msg_t SensorReadInit(SensorReadDriver *srdp,
                      const interrupt_sensor_t *intsenp,
