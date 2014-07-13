@@ -4,12 +4,148 @@
 		"selected_items":
 		[
 			[
-				"contr",
-				"control_yaw"
+				"SRD",
+				"SRD_UNINITIALIZED"
+			],
+			[
+				"Sen",
+				"SensorObjectInit"
+			],
+			[
+				"polled",
+				"polled_sensor_cnt"
+			],
+			[
+				"inter",
+				"interrupt_sensor_cnt"
+			],
+			[
+				"inte",
+				"interrupt_sensor_ptr"
+			],
+			[
+				"SRD_",
+				"SRD_UNINITIALIZED"
+			],
+			[
+				"interru",
+				"interrupt_sensor_t"
 			],
 			[
 				"osal",
-				"osalThreadSleepMilliseconds"
+				"osalSysUnlockFromISR"
+			],
+			[
+				"system",
+				"systime_t"
+			],
+			[
+				"ret",
+				"retmsg"
+			],
+			[
+				"osalS",
+				"osalSysUnlockFromISR"
+			],
+			[
+				"rea",
+				"read_sensor"
+			],
+			[
+				"sen",
+				"senp"
+			],
+			[
+				"waThread",
+				"waThreadSRD1"
+			],
+			[
+				"sr",
+				"srd_mailbox"
+			],
+			[
+				"in",
+				"interrupt_sensor_ptr"
+			],
+			[
+				"accu",
+				"accumulator"
+			],
+			[
+				"acc",
+				"accumulator"
+			],
+			[
+				"freq",
+				"frequency_hz"
+			],
+			[
+				"accumulated",
+				"accumulated_ticks"
+			],
+			[
+				"fr",
+				"frequency_hz"
+			],
+			[
+				"SENS",
+				"SENSOR_READ_STOPED"
+			],
+			[
+				"ini",
+				"init_sensor"
+			],
+			[
+				"intsen",
+				"intsenp"
+			],
+			[
+				"size",
+				"size_t"
+			],
+			[
+				"interr",
+				"interrupt_channel"
+			],
+			[
+				"insen",
+				"intsencnt"
+			],
+			[
+				"int",
+				"intsencnt"
+			],
+			[
+				"Sensor",
+				"SensorReadDriver"
+			],
+			[
+				"Sens",
+				"SensorsDriver"
+			],
+			[
+				"prio",
+				"priority_sensor"
+			],
+			[
+				"pri",
+				"priority_sensor"
+			],
+			[
+				"exp",
+				"expchannel_lookup"
+			],
+			[
+				"poll",
+				"pollsencnt"
+			],
+			[
+				"ints",
+				"intsenp"
+			],
+			[
+				"contr",
+				"control_yaw"
 			],
 			[
 				"FlashSave",
@@ -94,10 +230,6 @@
 			[
 				"req",
 				"requested_size"
-			],
-			[
-				"int",
-				"int16_t"
 			],
 			[
 				"uin",
@@ -268,10 +400,6 @@
 				"xSemaphoreGive"
 			],
 			[
-				"acc",
-				"acc_init"
-			],
-			[
 				"attitude",
 				"attitude_guess"
 			],
@@ -386,134 +514,6 @@
 			[
 				"def",
 				"define"
-			],
-			[
-				"SPIIni",
-				"SPI1Init"
-			],
-			[
-				"Generate",
-				"GenerateGenericCommand"
-			],
-			[
-				"xUS",
-				"xUSBSendData"
-			],
-			[
-				"USART",
-				"USART3"
-			],
-			[
-				"US",
-				"USART_putc"
-			],
-			[
-				"CB",
-				"CBuff"
-			],
-			[
-				"Cb",
-				"CBuff"
-			],
-			[
-				"test",
-				"testbuff"
-			],
-			[
-				"gener",
-				"generators"
-			],
-			[
-				"USA",
-				"USART3"
-			],
-			[
-				"USB",
-				"USB_Write_Lock"
-			],
-			[
-				"wr",
-				"write_lock"
-			],
-			[
-				"Get",
-				"GetParser"
-			],
-			[
-				"parser",
-				"parser_lookup"
-			],
-			[
-				"APP",
-				"APP_Rx_ptr_in"
-			],
-			[
-				"hea",
-				"head"
-			],
-			[
-				"P",
-				"Port"
-			],
-			[
-				"pH",
-				"pHolder"
-			],
-			[
-				"Cbuff",
-				"Cbuff_USB"
-			],
-			[
-				"GetR",
-				"Cmd_GetRunningMode"
-			],
-			[
-				"Gene",
-				"GenerateGenericCommand"
-			],
-			[
-				"Cir",
-				"CircularBuffer_SpaceLeft"
-			],
-			[
-				"KF",
-				"KFly_Command_Type"
-			],
-			[
-				"stat",
-				"switch-statement"
-			],
-			[
-				"ci",
-				"circularbuffer"
-			],
-			[
-				"in",
-				"include"
-			],
-			[
-				"seria",
-				"serialmanager_types"
-			],
-			[
-				"state",
-				"statemachine_types"
-			],
-			[
-				"port",
-				"portMAX_DELAY"
-			],
-			[
-				"size",
-				"size"
-			],
-			[
-				"cir",
-				"Circular_Buffer_Type"
-			],
-			[
-				"Err",
-				"ErrorStatus"
 			]
 		]
 	},
@@ -523,39 +523,23 @@
 			"file": "main.c",
 			"settings":
 			{
-				"buffer_size": 939,
+				"buffer_size": 1896,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "Makefile",
+			"file": "modules/sensors/src/sensor_read.c",
 			"settings":
 			{
-				"buffer_size": 6447,
+				"buffer_size": 15930,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "mcuconf.h",
+			"file": "modules/sensors/inc/sensors.h",
 			"settings":
 			{
-				"buffer_size": 13103,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "chconf.h",
-			"settings":
-			{
-				"buffer_size": 15628,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "halconf.h",
-			"settings":
-			{
-				"buffer_size": 9293,
+				"buffer_size": 8080,
 				"line_ending": "Windows"
 			}
 		}
@@ -653,6 +637,16 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Emil/Documents/GitHub/EmbeddedGenericSensor/chconf.h",
+		"/C/Users/Emil/Documents/GitHub/EmbeddedGenericSensor/board/board.h",
+		"/C/Users/Emil/Documents/GitHub/EmbeddedGenericSensor/modules/sensors/src/sensors.c",
+		"/C/Users/Emil/Documents/GitHub/EmbeddedGenericSensor/modules/sensors/inc/sensors.h",
+		"/C/Users/Emil/Documents/GitHub/EmbeddedGenericSensor/.gitignore",
+		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/.gitignore",
+		"/C/Users/Emil/Documents/GitHub/EmbeddedGenericSensor/test.c",
+		"/C/Users/Emil/Documents/GitHub/EmbeddedGenericSensor/halconf.h",
+		"/C/Users/Emil/Documents/GitHub/EmbeddedGenericSensor/mcuconf.h",
+		"/C/Users/Emil/Documents/GitHub/EmbeddedGenericSensor/Makefile",
 		"/C/Users/Emil/Documents/GitHub/EmbeddedGenericSensor/make/date.bat",
 		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/modules/communication/inc/serialmanager.h",
 		"/C/Users/Emil/Documents/GitHub/KFly_ChibiOS/build/obj/serial_usb.o",
@@ -770,21 +764,11 @@
 		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32F4xx/stm32f4xx.h",
 		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32/TIMv1/stm32_tim.h",
 		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32F4xx/stm32_rcc.h",
-		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32F0xx/stm32f0xx.h",
-		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32F0xx/stm32_rcc.h",
-		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/SPC5xx/eTimer_v1/icu_lld.c",
-		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/SPC5xx/eTimer_v1/icu_lld.h",
-		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32/TIMv1/pwm_lld.c",
-		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32/TIMv1/icu_lld.c",
-		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32/TIMv1/icu_lld.h",
-		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32/TIMv1/pwm_lld.h",
-		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/src/pwm.c",
-		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/kernel/include/chsys.h",
-		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/ports/GCC/ARMCMx/chcore_v7m.h"
+		"/C/Users/Emil/Documents/GitHub/ChibiOS-RT/os/hal/platforms/STM32F0xx/stm32f0xx.h"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -799,6 +783,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Sensors",
+			"_sensor_t",
+			"stop",
 			"RCOutputInit",
 			"PWM",
 			"chEvtBroadcastFlagsI",
@@ -901,6 +888,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"sensor_t",
 			"FLASH_DUMMY_BYTE",
 			"index",
 			"TIM_ClearITPendingBit",
@@ -919,13 +907,13 @@
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": false,
+		"whole_word": true,
 		"wrap": true
 	},
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -934,19 +922,54 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 939,
+						"buffer_size": 1896,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								866,
-								866
+								1651,
+								1651
 							]
 						],
 						"settings":
 						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 712.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "modules/sensors/src/sensor_read.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15930,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								826,
+								826
+							],
+							[
+								827,
+								827
+							]
+						],
+						"settings":
+						{
+							"spell_check": false,
 							"syntax": "Packages/C Improved/C Improved.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
@@ -955,138 +978,52 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "Makefile",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6447,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5544,
-								5544
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Makefile Improved/Makefile Improved.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 3181.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "mcuconf.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 13103,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								11108,
-								11108
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 4740.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "chconf.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 15628,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								15591,
-								15591
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 8070.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "halconf.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9293,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3405,
-								3405
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 4686.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 0,
 					"type": "text"
 				}
 			]
 		},
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 2,
+					"file": "modules/sensors/inc/sensors.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8080,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7982,
+								7982
+							]
+						],
+						"settings":
+						{
+							"spell_check": true,
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4212.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 28.0
 	},
 	"input":
 	{
@@ -1133,7 +1070,7 @@
 	"project": "generic_sensor.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 68.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1439,7 +1376,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 158.0,
+	"side_bar_width": 122.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

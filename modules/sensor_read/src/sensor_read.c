@@ -23,7 +23,7 @@
 
 #include "ch.h"
 #include "hal.h"
-#include "sensors.h"
+#include "sensor_read.h"
 
 /*===========================================================================*/
 /* Driver local definitions.                                                 */
@@ -239,7 +239,7 @@ static void sensors_polled_callback(void *param)
  * 
  * @init
  */
-void SensorObjectInit(SensorReadDriver *srdp)
+void SensorReadObjectInit(SensorReadDriver *srdp)
 {
     size_t i;
     srdp->state = SRD_UNINITIALIZED;
@@ -270,11 +270,11 @@ void SensorObjectInit(SensorReadDriver *srdp)
  * 
  * @api
  */
-msg_t SensorsInit(SensorReadDriver *srdp,
-                  const interrupt_sensor_t *intsenp,
-                  const polled_sensor_t *pollsenp,
-                  size_t intsencnt,
-                  size_t pollsencnt)
+msg_t SensorReadInit(SensorReadDriver *srdp,
+                     const interrupt_sensor_t *intsenp,
+                     const polled_sensor_t *pollsenp,
+                     size_t intsencnt,
+                     size_t pollsencnt)
 {
     chDbgCheck(srdp != NULL);
     chDbgCheck(srdp->state == SRD_UNINITIALIZED);
@@ -357,7 +357,7 @@ msg_t SensorsInit(SensorReadDriver *srdp,
  * 
  * @api
  */
-msg_t SensorsStart(SensorReadDriver *srdp)
+msg_t SensorReadStart(SensorReadDriver *srdp)
 {
     size_t i;
 
@@ -403,7 +403,7 @@ msg_t SensorsStart(SensorReadDriver *srdp)
  * 
  * @api
  */
-msg_t SensorsStop(SensorReadDriver *srdp)
+msg_t SensorReadStop(SensorReadDriver *srdp)
 {
     size_t i;
 
@@ -448,7 +448,7 @@ msg_t SensorsStop(SensorReadDriver *srdp)
  * 
  * @iclass
  */
-msg_t SensorsInjectReadI(SensorReadDriver *srdp, const sensor_t *senp)
+msg_t SensorReadInjectReadI(SensorReadDriver *srdp, const sensor_t *senp)
 {
     return queueReadI(srdp, senp);
 }
@@ -469,9 +469,9 @@ msg_t SensorsInjectReadI(SensorReadDriver *srdp, const sensor_t *senp)
  * 
  * @sclass
  */
-msg_t SensorsInjectReadS(SensorReadDriver *srdp,
-                         const sensor_t *senp,
-                         systime_t time)
+msg_t SensorReadInjectReadS(SensorReadDriver *srdp,
+                            const sensor_t *senp,
+                            systime_t time)
 {
     if (senp->priority_sensor == true)
         /* Priority sensor, put it at the front of the queue */

@@ -206,18 +206,18 @@ extern SensorReadDriver SRD1;
 extern "C" {
 #endif
 void sensors_interrupt_callback(EXTDriver *extp, expchannel_t channel);
-void SensorObjectInit(SensorReadDriver *srdp);
-msg_t SensorsInit(SensorReadDriver *srdp,
-                  const interrupt_sensor_t *intsenp,
-                  const polled_sensor_t *pollsenp,
-                  size_t intsencnt,
-                  size_t pollsencnt);
-msg_t SensorsStart(SensorReadDriver *srdp);
-msg_t SensorsStop(SensorReadDriver *srdp);
-msg_t SensorsInjectReadI(SensorReadDriver *srdp, const sensor_t *senp);
-msg_t SensorsInjectReadS(SensorReadDriver *srdp,
-                         const sensor_t *senp,
-                         systime_t time);
+void SensorReadObjectInit(SensorReadDriver *srdp);
+msg_t SensorReadInit(SensorReadDriver *srdp,
+                     const interrupt_sensor_t *intsenp,
+                     const polled_sensor_t *pollsenp,
+                     size_t intsencnt,
+                     size_t pollsencnt);
+msg_t SensorReadStart(SensorReadDriver *srdp);
+msg_t SensorReadStop(SensorReadDriver *srdp);
+msg_t SensorReadInjectReadI(SensorReadDriver *srdp, const sensor_t *senp);
+msg_t SensorReadInjectReadS(SensorReadDriver *srdp,
+                            const sensor_t *senp,
+                            systime_t time);
 #ifdef __cplusplus
 }
 #endif
@@ -241,14 +241,14 @@ msg_t SensorsInjectReadS(SensorReadDriver *srdp,
  * 
  * @api
  */
-static inline msg_t SensorsInjectRead(SensorReadDriver *srdp,
-                                      const sensor_t *senp,
-                                      systime_t time)
+static inline msg_t SensorReadInjectRead(SensorReadDriver *srdp,
+                                         const sensor_t *senp,
+                                         systime_t time)
 {
     msg_t rdymsg;
 
     chSysLock();
-    rdymsg = SensorsInjectReadS(srdp, senp, time);
+    rdymsg = SensorReadInjectReadS(srdp, senp, time);
     chSysUnlock();
 
     return rdymsg;

@@ -1,7 +1,7 @@
 #include "ch.h"
 #include "hal.h"
 #include "myusb.h"
-#include "sensors.h"
+#include "sensor_read.h"
 
 msg_t my_polled_sensor1_init(void *);
 msg_t my_polled_sensor1_read(void *);
