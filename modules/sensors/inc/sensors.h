@@ -165,7 +165,7 @@ typedef struct
      * @brief   Number of polled sensors.
      */
     msg_t messages[SRD_MAILBOX_SIZE];
-#if SRD_DEBUG
+#if SRD_DEBUG || defined(__DOXYGEN__)
     /**
      * @brief   Keeps the debug status of the mailbox in case of
      *          to many requests.
@@ -182,8 +182,13 @@ typedef struct
 /* Driver declarations.                                                      */
 /*===========================================================================*/
 
+#if !defined(__DOXYGEN__)
 extern SensorReadDriver SRD1;
+#endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 void sensors_interrupt_callback(EXTDriver *extp, expchannel_t channel);
 void SensorObjectInit(SensorReadDriver *srdp);
 msg_t SensorsInit(SensorReadDriver *srdp,
@@ -197,7 +202,9 @@ msg_t SensorsInjectReadI(SensorReadDriver *srdp, const sensor_t *senp);
 msg_t SensorsInjectReadS(SensorReadDriver *srdp,
                          const sensor_t *senp,
                          systime_t time);
-
+#ifdef __cplusplus
+}
+#endif
 /*===========================================================================*/
 /* Driver exported inline functions.                                         */
 /*===========================================================================*/
