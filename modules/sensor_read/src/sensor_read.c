@@ -108,10 +108,10 @@ const interrupt_sensor_t *extchannel2interrupt_sensor(SensorReadDriver *srdp,
 }
 
 /**
- * @brief           Queues a sensor read to the reading thread.
+ * @brief               Queues a sensor read to the reading thread.
  * 
- * @param[in] srdp  Pointer to the SensorReadDriver object.
- * @param[in] senp  Pointer the generic_sensor_t object to be queued.
+ * @param[in] srdp      Pointer to the SensorReadDriver object.
+ * @param[in] senp      Pointer the generic_sensor_t object to be queued.
  * 
  * @return              The operation status.
  * @retval MSG_OK       If a read request has been correctly queued.
@@ -439,10 +439,10 @@ msg_t SensorReadStop(SensorReadDriver *srdp)
 }
 
 /**
- * @brief           Queues a sensor read to the reading thread.
+ * @brief               Queues a sensor read to the reading thread.
  * 
- * @param[in] srdp  Pointer to the SensorReadDriver object.
- * @param[in] senp  Pointer the generic_sensor_t object to be queued.
+ * @param[in] srdp      Pointer to the SensorReadDriver object.
+ * @param[in] senp      Pointer the generic_sensor_t object to be queued.
  * 
  * @return              The operation status.
  * @retval MSG_OK       If a read request has been correctly queued.
@@ -457,12 +457,12 @@ msg_t SensorReadInjectReadI(SensorReadDriver *srdp,
 }
 
 /**
- * @brief           Queues a sensor read to the reading thread.
+ * @brief               Queues a sensor read to the reading thread.
  * 
- * @param[in] srdp  Pointer to the SensorReadDriver object.
- * @param[in] senp  Pointer the generic_sensor_t object to be queued.
- * @param[in] time  The number of ticks before the opertion timeouts.
- *                  TIME_IMMEDIATE and TIME_INFINITE is allowed.
+ * @param[in] srdp      Pointer to the SensorReadDriver object.
+ * @param[in] senp      Pointer the generic_sensor_t object to be queued.
+ * @param[in] time      The number of ticks before the operation timeouts.
+ *                      TIME_IMMEDIATE and TIME_INFINITE is allowed.
  * 
  * @return              The operation status.
  * @retval MSG_OK       If a read request has been correctly queued.
