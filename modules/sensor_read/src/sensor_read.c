@@ -242,14 +242,11 @@ static void sensors_polled_callback(void *param)
  */
 void SensorReadObjectInit(SensorReadDriver *srdp)
 {
-    size_t i;
     srdp->state = SRD_UNINITIALIZED;
     srdp->interrupt_sensor_ptr = NULL;
     srdp->polled_sensor_ptr = NULL;
     srdp->interrupt_sensor_cnt = 0;
     srdp->polled_sensor_cnt = 0;
-    for (i = 0; i < EXT_MAX_CHANNELS; i++)
-        srdp->expchannel_lookup[i] = -1;
     chMBObjectInit(&srdp->srd_mailbox, srdp->messages, SRD_MAILBOX_SIZE);
 #if SRD_DEBUG
     SRD1.dbg_mailbox_overflow = false;
@@ -286,6 +283,10 @@ msg_t SensorReadInit(SensorReadDriver *srdp,
     
     size_t i;
     msg_t retval;
+
+    /* Clear the lookup table */
+    for (i = 0; i < EXT_MAX_CHANNELS; i++)
+        srdp->expchannel_lookup[i] = -1;
 
     /* Generate interrupt channel -> array index table */
     for (i = 0; i < intsencnt; i++)
